@@ -13,24 +13,34 @@
                   <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Email</th>
                     <th>Jenis Kelamin</th>
                     <th>Penyakit</th>
                     <th>Persentase</th>
+                    <th>action</th>
+
                   </tr>
                   </thead>
-                  <tbody>  
+                  <tbody>
                   @forelse ($posts as $post)
-                    <tr class='clickable-row' 
-                    data-toggle="modal" 
-                    data-target="#editModal" 
+                    <tr class='clickable-row'
+                    data-toggle="modal"
+                    data-target="#editModal"
                     onclick="onClick({{$post}})">
                       <td>{{$post->name}}</td>
-                      <td>{{$post->email}}</td>
                       <td>{{$post->jenis_kelamin}}</td>
                       <td>{{$post->penyakit}}</td>
                       <td>{{$post->persentase}}</td>
-                    </tr>                  
+                      <td>
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('diagnosa.destroy', $post->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-tool">
+                            hapus
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
                   @empty
                   <div class="alert alert-danger">
                       Data gejala belum Tersedia.
@@ -40,10 +50,10 @@
                   <tfoot>
                   <tr>
                     <th>Name</th>
-                    <th>Email</th>
                     <th>Jenis Kelamin</th>
                     <th>Penyakit</th>
                     <th>Persentase</th>
+                    <th>action</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -66,7 +76,7 @@
                 <form action="" method="post">
                   <div class="modal-body">
                     <fieldset id="modal_form">
-                      
+
                       <div class="form-group">
                         <label for="exampleInputName">Nama</label>
                         <input type="text" class="form-control" name="nama" id="exampleInputNama" placeholder="Enter nama anda" disabled>
@@ -127,4 +137,4 @@
     }
   </script>
 
-@endsection    
+@endsection

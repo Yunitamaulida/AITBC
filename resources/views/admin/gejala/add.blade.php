@@ -20,6 +20,10 @@
                             <label for="exampleInputEmail1">nama</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  id="exampleInputName1" placeholde r="Enter name Gejala">
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">bobot</label>
+                            <input type="text" class="form-control @error('bobot') is-invalid @enderror" name="bobot" value="{{ old('bobot') }}"  id="exampleInputName1" placeholder="Enter Bobot">
+                        </div>
                     </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -36,4 +40,4 @@
     <script>
         CKEDITOR.replace( 'content' );
     </script>
-@endsection  
+@endsection

@@ -56,7 +56,7 @@ class DiagnosaController extends Controller
         $gejala = array_keys($result['gejala_terpilih']);
         $penyakit = $result['cf_max']['kodePenyakit'];
         $persentase = $result['cf_max']['nilai_diagnosa'];
-        return $result;
+
         // //validate form
         $this->validate($request, [
             'nama'     => 'required',
@@ -110,7 +110,7 @@ class DiagnosaController extends Controller
                 ];
         }
         $berat = 0;
-        $kesamaan = 0;
+        $kesamaan = [];
         $penyakitPrakira = [];
         $perhitunganAwal = [];
         $hasilDiagnosa = [];
@@ -122,14 +122,19 @@ class DiagnosaController extends Controller
             if (empty($penyakitPrakira[$key])) {
                 $penyakitPrakira[$key] = [];
             }
+
+            if (empty($kesamaan[$key])) {
+                $kesamaan[$key] = 0;
+            }
             foreach ($gejalaTerpilih as $key2 => $value2) {
                 if (!empty($value[$key2])) {
-                    $kesamaan = $kesamaan + $value[$key2];
+                    $kesamaan[$key] = $kesamaan[$key] + $value[$key2];
                     $penyakitPrakira[$key][$key2] = $value[$key2];
                 }
             }
+
             $perhitunganAwal[$key]['berat'] = $berat;
-            $perhitunganAwal[$key]['kesamaan'] = $kesamaan;
+            $perhitunganAwal[$key]['kesamaan'] = $kesamaan[$key];
         }
         foreach ($perhitunganAwal as $key => $value) {
             $hasil[$key] = ($value['kesamaan'] / 25) * 100;
@@ -159,10 +164,7 @@ class DiagnosaController extends Controller
             'hasil_diagnosa' => $hasilDiagnosa,
             'gejala_terpilih' => $gejalaTerpilih,
             'cf_max' => $cfMax,
-            'kesamaan' => $kesamaan,
-            'berat' => $berat,
-            'penyakit' => $penyakit
-
+            'kesamaan' => $kesamaan
 
         ];
     }

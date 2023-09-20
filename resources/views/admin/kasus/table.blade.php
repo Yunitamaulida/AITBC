@@ -8,10 +8,10 @@
                 <h3 class="card-title">DataTable Kasus</h3>
                 <div class="card-tools">
                   <button onclick="location.href='{{route('kasus.create')}}'" type="button" class="btn btn-tool">
-                    Tambah 
+                    Tambah
                     <i class="fas fa-plus"></i>
                   </button>
-                </div>  
+                </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -21,21 +21,23 @@
                     <th>Id</th>
                     <th>Penyakit</th>
                     <th>Gejala</th>
-                    <th>Bobot</th>
+                    <th>Deskripsi</th>
+                    <th>Solusi</th>
                     <th>Action</th>
                   </tr>
                   </thead>
-                  <tbody>  
+                  <tbody>
                   @forelse ($posts as $post)
                     <tr>
                       <td>{{$post->id}}</td>
                       <td>{{$post->penyakit}}</td>
                       <td>{{$post->gejala}}</td>
-                      <td>{{$post->bobot}}</td>
+                      <td>{{$post->deskipsi}}</td>
+                      <td>{{$post->solusi}}</td>
                       <td>
                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kasus.destroy', $post->id) }}" method="POST">
                           <button onclick="location.href='{{route('kasus.edit', $post->id)}}'" type="button" class=" btn btn-tool">
-                            edit 
+                            edit
                             <i class="fas fa-edit"></i>
                           </button>
                           @csrf
@@ -46,7 +48,7 @@
                           </button>
                         </form>
                       </td>
-                    </tr>                  
+                    </tr>
                   @empty
                   <div class="alert alert-danger">
                       Data Kasus belum Tersedia.
@@ -58,12 +60,13 @@
                     <th>Id</th>
                     <th>Penyakit</th>
                     <th>Gejala</th>
-                    <th>Bobot</th>
+                    <th>Deskripsi</th>
+                    <th>Solusi</th>
                     <th>Action</th>
                   </tr>
                   </tfoot>
                 </table>
-                
+
                 {{-- {{ $posts->links() }} --}}
               </div>
               <!-- /.card-body -->
@@ -77,13 +80,13 @@
   <script>
     //message with toastr
     @if(session()->has('success'))
-    
-        toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+
+        toastr.success('{{ session('success') }}', 'BERHASIL!');
 
     @elseif(session()->has('error'))
 
-        toastr.error('{{ session('error') }}', 'GAGAL!'); 
-        
+        toastr.error('{{ session('error') }}', 'GAGAL!');
+
     @endif
   </script>
                   <script>
@@ -92,4 +95,4 @@
                     });
                   </script>
 
-@endsection    
+@endsection

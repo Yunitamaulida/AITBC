@@ -25,7 +25,9 @@ class KasusController extends Controller
     public function index()
     {
         //get posts
-        $posts = Kasus::all();
+        $posts = Kasus::join('penyakits', 'penyakits.kode', '=', 'kasuses.penyakit')
+                 ->select('penyakits.deskipsi', 'penyakits.solusi', 'kasuses.gejala', 'kasuses.id', 'kasuses.penyakit', 'kasuses.bobot')
+                 ->get();
         //render view with posts
         return view('admin.kasus.table', compact('posts'));
     }

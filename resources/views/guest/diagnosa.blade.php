@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-   
+
     <!--====== Required meta tags ======-->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <!--====== Title ======-->
     <title>TBC Kecerdasan Buatan - Diagnosa</title>
     <!--====== Favicon Icon ======-->
-    <link rel = "icon" href = {{ asset('admin/dist/img/AdminLTELogo.png') }}  type = "image/x-icon">
+    <link rel="icon" href={{ asset('admin/dist/img/AdminLTELogo.png') }} type="image/x-icon">
     <!--====== Bootstrap css ======-->
     <link rel="stylesheet" href={{asset('guest/assets/css/bootstrap.min.css')}}>
     <!--====== Slick css ======-->
@@ -34,7 +34,7 @@
 </head>
 
 <body>
-  
+
     <!--====== HEADER ONE PART START ======-->
 
     <header class="header-area">
@@ -83,87 +83,87 @@
         </div>
 
         <form action="{{ route('diagnosa.post') }}" method="post">
-        @csrf
-        <div id="diagnosa" class="header-content-area d-flex align-items-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="header-wrapper">
-                            <div class="header-content">
-                                <div class="card">
-                                    <!-- /.card-header -->
-                                    <div class="card-header">
-                                        <h3 class="card-title">Input Data Diri Anda</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputName">Nama</label>
-                                            <input type="text" class="form-control @error('kode') is-invalid @enderror" name="nama" value="{{ old('nama') }}"  id="exampleInputNama" placeholder="Enter nama anda">
+            @csrf
+            <div id="diagnosa" class="header-content-area d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="header-wrapper">
+                                <div class="header-content">
+                                    <div class="card">
+                                        <!-- /.card-header -->
+                                        <div class="card-header">
+                                            <h3 class="card-title">Input Data Diri Anda</h3>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail">Email</label>
-                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  id="exampleInputEmail" placeholder="Enter email anda">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <label for="exampleInputBerat">Berat Badan</label>
-                                                <input type="number" class="form-control" placeholder="Enter Berat Badan" name="bb" id="exampleInputBerat">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputName">Nama</label>
+                                                <input type="text" class="form-control @error('kode') is-invalid @enderror" name="nama" value="{{ old('nama') }}" id="exampleInputNama" placeholder="Enter nama anda">
                                             </div>
-                                            <div class="col-4">
-                                                <label for="exampleInputTinggi">Tinggi Badan</label>
-                                                <input type="number" class="form-control" placeholder="Enter Tinggi Badan" name="bt" id="exampleInputTinggi">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail">Email</label>
+                                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="exampleInputEmail" placeholder="Enter email anda">
                                             </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                <label>Jenis Kelamin</label>
-                                                <select class="custom-select" name="jenis">
-                                                    <option value="L">Laki Laki</option>
-                                                    <option value="P">Perempuan</option>
-                                                </select>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="exampleInputBerat">Berat Badan</label>
+                                                    <input type="number" class="form-control" placeholder="Enter Berat Badan" name="bb" id="exampleInputBerat">
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="exampleInputTinggi">Tinggi Badan</label>
+                                                    <input type="number" class="form-control" placeholder="Enter Tinggi Badan" name="bt" id="exampleInputTinggi">
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>Jenis Kelamin</label>
+                                                        <select class="custom-select" name="jenis">
+                                                            <option value="L">Laki Laki</option>
+                                                            <option value="P">Perempuan</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputAlamat">Alamat</label>
-                                            <textarea type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}"  id="exampleInputAlamat" placeholder="Enter alamat anda"></textarea>
+                                            <div class="form-group">
+                                                <label for="exampleInputAlamat">Alamat</label>
+                                                <textarea type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}" id="exampleInputAlamat" placeholder="Enter alamat anda"></textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div> <!-- header content -->
+                                </div> <!-- header content -->
 
-                            <div class="header-image d-none d-lg-block">
-                                <div class="card image">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Diagnosa TBC</h3>
-                                        <div class="card-tools">
-                                        <button type="submit" class="btn btn-primary">
-                                            Mendiagnosa 
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                        </div>  
-                                    </div><!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped" style="text-align: center">
-                                            <thead>
-                                                <tr>
-                                                    <th>nama</th>
-                                                    <th>action</th>
-                                                </tr>
+                                <div class="header-image d-none d-lg-block">
+                                    <div class="card image">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Diagnosa TBC</h3>
+                                            <div class="card-tools">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Mendiagnosa
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div><!-- /.card-header -->
+                                        <div class="card-body">
+                                            <table id="example1" class="table table-bordered table-striped" style="text-align: center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>nama</th>
+                                                        <th>action</th>
+                                                    </tr>
                                                 </thead>
-                                                <tbody>  
-                                                @forelse ($gejala as $key => $post)
+                                                <tbody>
+                                                    @forelse ($gejala as $key => $post)
                                                     <tr>
                                                         <td>{{$post->name}}
                                                             <input style="text-align:center; border-color: transparent;" name="inputs[{{$key}}][kode]" type="text" value={{$post->kode}} hidden>
                                                             <input style="text-align:center; border-color: transparent;" name="inputs[{{$key}}][name]" type="text" value={{$post->name}} hidden>
                                                         </td>
                                                         <td><input style="text-align:center" class="icheck-primary" name="inputs[{{$key}}][milih]" type="checkbox" id="remember"></td>
-                                                    </tr>                  
-                                                @empty
+                                                    </tr>
+                                                    @empty
                                                     <div class="alert alert-danger">
-                                                    Data gejala belum tersedia.
+                                                        Data gejala belum tersedia.
                                                     </div>
-                                                @endforelse
+                                                    @endforelse
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
@@ -175,17 +175,17 @@
                                         </div><!-- /.card-body -->
                                     </div><!-- /.card -->
                                 </div>
+                            </div>
                         </div>
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-            <div class="header-shape">
-                <img src="{{asset('guest/assets/images/header-shape.svg')}}" alt="shape">
-            </div> <!-- header-shape -->
-        </div> <!-- header content area -->
+                    </div> <!-- row -->
+                </div> <!-- container -->
+                <div class="header-shape">
+                    <img src="{{asset('guest/assets/images/header-shape.svg')}}" alt="shape">
+                </div> <!-- header-shape -->
+            </div> <!-- header content area -->
         </form>
     </header>
-    
+
     <!--====== FOOTER PART START ======-->
 
     <footer id="footer" class="footer-area">
@@ -246,7 +246,7 @@
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- footer widget -->
-        
+
         <div class="footer-copyright">
             <div class="container">
                 <div class="row">
@@ -261,15 +261,15 @@
     </footer>
 
     <!--====== FOOTER PART ENDS ======-->
-    
+
     <!--====== BACK TOP TOP PART START ======-->
 
     <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
 
-    <!--====== BACK TOP TOP PART ENDS ======-->   
-    
-    
-    
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+
+
 
     <!--====== jquery js ======-->
     <script src="{{asset('guest/assets/js/vendor/modernizr-3.6.0.min.js')}}"></script>
@@ -282,16 +282,16 @@
 
     <!--====== Images Loaded js ======-->
     <script src="{{asset('guest/assets/js/imagesloaded.pkgd.min.js')}}"></script>
-    
+
     <!--====== Scrolling Nav js ======-->
     <script src="{{asset('guest/assets/js/jquery.easing.min.js')}}"></script>
     <script src="{{asset('guest/assets/js/scrolling-nav.js')}}"></script>
-    
-    
+
+
     <!--====== Slick js ======-->
     <script src="{{asset('guest/assets/js/slick.min.js')}}"></script>
-    
-    
+
+
     <!--====== Main js ======-->
     <script src="{{asset('guest/assets/js/main.js')}}"></script>
     <!-- DataTables  & Plugins -->
@@ -303,29 +303,34 @@
     <script src={{ asset('admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}></script>
 
     <script>
-        $(function () {
-          $("#example1").DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-            "iDisplayLength": 5,
-          });
-          $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-          });
+        $(function() {
+            $("#example1").DataTable({
+                "paging": false,
+                "scrollCollapse": true,
+                "scrollY": '300px',
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": false,
+                "autoWidth": false,
+                "responsive": true,
+                "aLengthMenu": [
+                    [5, 10, 15, -1],
+                    [5, 10, 15, "All"]
+                ],
+                "iDisplayLength": 5,
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
-      </script>
+    </script>
 </body>
 
 </html>

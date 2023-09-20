@@ -40,7 +40,7 @@ class PenyakitController extends Controller
     {
         return view('admin.penyakit.add');
     }
-    
+
     /**
      * store
      *
@@ -53,8 +53,6 @@ class PenyakitController extends Controller
         $this->validate($request, [
             'kode'     => 'required|min:1',
             'name'     => 'required|min:1',
-            'deskripsi'     => 'required|min:1',
-            'solusi'     => 'required|min:1',
         ]);
 
         //create post
@@ -62,14 +60,12 @@ class PenyakitController extends Controller
             // 'image'     => $image->hashName(),
             'kode'     => $request->kode,
             'name'     => $request->name,
-            'deskipsi'     => $request->deskripsi,
-            'solusi'     => $request->solusi,
         ]);
 
         //redirect to index
         return redirect('penyakit')->with(['success' => 'Data Berhasil Disimpan!']);
     }
-    
+
     /**
      * edit
      *
@@ -84,7 +80,7 @@ class PenyakitController extends Controller
         //render view with post
         return view('admin.penyakit.edit', compact('post'));
     }
-    
+
     /**
      * update
      *
@@ -97,15 +93,11 @@ class PenyakitController extends Controller
         //validate form
         $this->validate($request, [
             'name'     => 'required',
-            'deskripsi'     => 'required',
-            'solusi'     => 'required',
         ]);
 
         //get post by ID
         $post = Penyakit::where('kode', $kode)->update([
             'name'     => $request->name,
-            'deskipsi'     => $request->deskripsi,
-            'solusi'     => $request->solusi,
         ]);
 
         //redirect to index
@@ -120,7 +112,7 @@ class PenyakitController extends Controller
         //redirect to index
         return redirect('penyakit')->with(['success' => 'Data Berhasil Dihapus!']);
     }
-    
+
     public function check()
     {
         return ! is_null($this->user());

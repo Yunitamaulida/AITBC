@@ -41,7 +41,7 @@ class GejalaController extends Controller
     {
         return view('admin.gejala.add');
     }
-    
+
     /**
      * store
      *
@@ -54,6 +54,7 @@ class GejalaController extends Controller
         $this->validate($request, [
             'kode'     => 'required|min:2',
             'name'     => 'required|min:2',
+            'bobot'     => 'required',
         ]);
 
         //create post
@@ -61,12 +62,13 @@ class GejalaController extends Controller
             // 'image'     => $image->hashName(),
             'kode'     => $request->kode,
             'name'     => $request->name,
+            'bobot'    => $request->bobot,
         ]);
 
         //redirect to index
         return redirect('gejala')->with(['success' => 'Data Berhasil Disimpan!']);
     }
-    
+
     /**
      * edit
      *
@@ -81,7 +83,7 @@ class GejalaController extends Controller
         //render view with post
         return view('admin.gejala.edit', compact('post'));
     }
-    
+
     /**
      * update
      *
@@ -94,11 +96,13 @@ class GejalaController extends Controller
         //validate form
         $this->validate($request, [
             'name'     => 'required',
+            'bobot'    => 'required',
         ]);
 
         //get post by ID
         Gejala::where('kode', $kode)->update([
             'name'     => $request->name,
+            'bobot'    => $request->bobot,
         ]);
         //redirect to index
         return redirect('gejala')->with(['success' => 'Data Berhasil Diubah!']);
@@ -112,7 +116,7 @@ class GejalaController extends Controller
         //redirect to index
         return redirect('gejala')->with(['success' => 'Data Berhasil Dihapus!']);
     }
-    
+
     public function check()
     {
         return ! is_null($this->user());

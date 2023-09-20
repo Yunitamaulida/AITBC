@@ -21,4 +21,12 @@ class KasusDiagnosaController extends Controller
         //render view with posts
         return view('admin.diagnosa.table', compact('posts'));
     }
+    public function destroy($id)
+    {
+        //get post by ID delete post
+        Diagnosa::where('id', $id)->delete();
+
+        //redirect to index
+        return redirect('diagnosa')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
 }

@@ -20,14 +20,6 @@
                             <label for="exampleInputEmail">Nama</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  id="exampleInputName" placeholder="Input Nama Penyakit">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputDeskripsi">Deskripsi</label>
-                            <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi') }}"  id="exampleInputDeskripsi" placeholder="Input Deskripsi">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputSolusi">Solusi</label>
-                            <input type="text" class="form-control @error('solusi') is-invalid @enderror" name="solusi" value="{{ old('solusi') }}"  id="exampleInputSolusi" placeholder="Input Solusi">
-                        </div>
                     </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -44,4 +36,4 @@
     <script>
         CKEDITOR.replace( 'content' );
     </script>
-@endsection  
+@endsection
