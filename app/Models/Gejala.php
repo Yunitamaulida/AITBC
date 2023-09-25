@@ -18,4 +18,9 @@ class Gejala extends Model
         'name',
         'bobot',
     ];
+
+    public function kasus(): BelongsTo
+    {
+        return $this->belongsTo(Kasus::class);
+    }
 }

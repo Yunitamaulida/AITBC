@@ -20,23 +20,26 @@
                   <tr>
                     <th>Id</th>
                     <th>Penyakit</th>
-                    <th>Gejala</th>
+                    {{-- <th>Gejala</th> --}}
                     <th>Deskripsi</th>
                     <th>Solusi</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                  @forelse ($posts as $post)
+                  @php
+                      $no=1;
+                  @endphp
+                  @forelse ($penyakits as $penyakit)
                     <tr>
-                      <td>{{$post->id}}</td>
-                      <td>{{$post->penyakit}}</td>
-                      <td>{{$post->gejala}}</td>
-                      <td>{{$post->deskipsi}}</td>
-                      <td>{{$post->solusi}}</td>
+                      <td>{{$no}}</td>
+                      <td>{{$penyakit->penyakit}}</td>
+                      {{-- <td>{{$penyakit->gejala}}</td> --}}
+                      <td>{{$penyakit->deskipsi}}</td>
+                      <td>{{$penyakit->solusi}}</td>
                       <td>
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kasus.destroy', $post->id) }}" method="POST">
-                          <button onclick="location.href='{{route('kasus.edit', $post->id)}}'" type="button" class=" btn btn-tool">
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kasus.destroy', $penyakit->id) }}" method="POST">
+                          <button onclick="location.href='{{route('kasus.edit', $penyakit->id)}}'" type="button" class=" btn btn-tool">
                             edit
                             <i class="fas fa-edit"></i>
                           </button>
@@ -49,6 +52,9 @@
                         </form>
                       </td>
                     </tr>
+                    @php
+                        $no++
+                    @endphp
                   @empty
                   <div class="alert alert-danger">
                       Data Kasus belum Tersedia.
