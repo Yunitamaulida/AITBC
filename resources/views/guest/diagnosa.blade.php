@@ -106,14 +106,6 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-4">
-                                                    <label for="exampleInputBerat">Berat Badan</label>
-                                                    <input type="number" class="form-control" placeholder="Enter Berat Badan" name="bb" id="exampleInputBerat">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="exampleInputTinggi">Tinggi Badan</label>
-                                                    <input type="number" class="form-control" placeholder="Enter Tinggi Badan" name="bt" id="exampleInputTinggi">
-                                                </div>
-                                                <div class="col-4">
                                                     <div class="form-group">
                                                         <label>Jenis Kelamin</label>
                                                         <select class="custom-select" name="jenis">

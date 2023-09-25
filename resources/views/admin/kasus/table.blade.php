@@ -18,22 +18,18 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Id</th>
-                    <th>Penyakit</th>
+                    <th>No</th>
+                    <th>Kasus Penyakit</th>
                     <th>Gejala</th>
-                    <th>Deskripsi</th>
-                    <th>Solusi</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
                   @forelse ($posts as $post)
                     <tr>
-                      <td>{{$post->id}}</td>
+                      <td>{{$post->No}}</td>
                       <td>{{$post->penyakit}}</td>
                       <td>{{$post->gejala}}</td>
-                      <td>{{$post->deskipsi}}</td>
-                      <td>{{$post->solusi}}</td>
                       <td>
                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kasus.destroy', $post->id) }}" method="POST">
                           <button onclick="location.href='{{route('kasus.edit', $post->id)}}'" type="button" class=" btn btn-tool">
@@ -57,11 +53,9 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>Id</th>
+                    <th>No</th>
                     <th>Penyakit</th>
                     <th>Gejala</th>
-                    <th>Deskripsi</th>
-                    <th>Solusi</th>
                     <th>Action</th>
                   </tr>
                   </tfoot>

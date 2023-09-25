@@ -25,9 +25,7 @@ class KasusController extends Controller
     public function index()
     {
         //get posts
-        $posts = Kasus::join('penyakits', 'penyakits.kode', '=', 'kasuses.penyakit')
-                 ->select('penyakits.deskipsi', 'penyakits.solusi', 'kasuses.gejala', 'kasuses.id', 'kasuses.penyakit', 'kasuses.bobot')
-                 ->get();
+        $posts = Kasus::all();
         //render view with posts
         return view('admin.kasus.table', compact('posts'));
     }
@@ -98,7 +96,7 @@ class KasusController extends Controller
     {
         //validate form
         $this->validate($request, [
-            'penyakit'     => 'required|min:1',
+            'Kasus penyakit'     => 'required|min:1',
             'gejala'     => 'required|min:1',
             'bobot'     => 'required',
         ]);
@@ -107,7 +105,7 @@ class KasusController extends Controller
         $post = Kasus::findOrFail($kode);
 
         $post->update([
-            'penyakit'     => $request->penyakit,
+            'Kasus penyakit'     => $request->penyakit,
             'gejala'     => $request->gejala,
             'bobot'     => $request->bobot,
         ]);

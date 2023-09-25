@@ -21,6 +21,14 @@
                                 <label for="exampleInputEmail1">nama</label>
                                 <input type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name',$post->name) }}"  id="exampleInputName1" placeholde r="Enter name pengguna">
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">deskripsi</label>
+                                <input type="name" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('name',$post->deskripsi) }}"  id="exampleInputName1" placeholde r="Enter name pengguna">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">solusi</label>
+                                <input type="name" class="form-control @error('solusi') is-invalid @enderror" name="solusi" value="{{ old('name',$post->solusi) }}"  id="exampleInputName1" placeholde r="Enter name pengguna">
+                            </div>
                           </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
