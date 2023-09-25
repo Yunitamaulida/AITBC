@@ -17,7 +17,6 @@
                                 <tr>
                                     <th>Penyakit</th>
                                     <th>Gejala</th>
-                                    <th>Bobot</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -42,12 +41,6 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <div class="form-group">
-                                            <input id="myRange" type="text" max="20" min="0" value="1" class="form-control @error('bobot') is-invalid @enderror" name="inputs[0][bobot]" value="{{ old('bobot') }}">
-
-                                        </div>
-                                    </td>
-                                    <td>
                                         <button type="button" class=" btn btn-tool" id="add">
                                             Tambah
                                             <i class="fas fa-plus"></i>
@@ -59,7 +52,6 @@
                                 <tr>
                                     <th>Penyakit</th>
                                     <th>Gejala</th>
-                                    <th>Bobot</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -81,7 +73,7 @@
         var slider = document.getElementById("myRange");
         var output = document.getElementById("demo");
         output.innerHTML = slider.value;
-        
+
         slider.oninput = function() {
           output.innerHTML = (this.value / 10);
         }
@@ -113,11 +105,6 @@
                                 <option>kosong</option>
                             @endforelse
                         </select>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <input id="myRange" type="text" max="20" min="1" class="form-control @error('bobot') is-invalid @enderror" name="inputs[` + i + `][bobot]" value="{{ old('bobot') }}"  id="exampleInputBobot" placeholder="Enter Bobot">
-                        </div>
                     </td>
                     <td>
                         <button type="button" class=" btn btn-tool remove-table-row" onclick="remove(this)">

@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 //return type redirectResponse
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -25,11 +26,12 @@ class KasusController extends Controller
     public function index()
     {
         //get posts
-        $penyakits = Kasus::join('penyakits', 'penyakits.kode', '=', 'kasuses.penyakit')
-                 ->select('penyakits.deskipsi', 'penyakits.solusi', 'kasuses.gejala', 'kasuses.id', 'kasuses.penyakit', 'kasuses.bobot')
-                 ->get();
+        // $penyakits = Kasus::join('penyakits', 'penyakits.kode', '=', 'kasuses.penyakit')
+        //          ->select('penyakits.deskipsi', 'penyakits.solusi', 'kasuses.gejala', 'kasuses.id', 'kasuses.penyakit', 'kasuses.bobot')
+        //          ->get();
 
-        // $penyakits = Penyakit::with("gejalas")->get();
+        $penyakits = Penyakit::with("gejalas")->get();
+        // return $penyakits;
 
         //render view with posts
         return view('admin.kasus.table', compact('penyakits'));
@@ -58,16 +60,14 @@ class KasusController extends Controller
         $this->validate($request, [
             'inputs.*.penyakit'     => 'required',
             'inputs.*.gejala'     => 'required',
-            'inputs.*.bobot'     => 'required',
+            'inputs.*.bobot'     => '',
         ]);
         //create post
-        foreach ($request->inputs as $key => $value) {
-            Kasus::create([
-                'penyakit'     => $value['penyakit'],
-                'gejala'     => $value['gejala'],
-                'bobot'     => $value['bobot'],
-            ]);
-        }
+        Kasus::create([
+            'penyakit'     => $request->penyakit,
+            'gejala'     => $request->gejala,
+            'bobot'     => 0,
+        ]);
 
         //redirect to index
         return redirect('kasus')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -81,10 +81,17 @@ class KasusController extends Controller
      */
     public function edit(string $id)
     {
-        $gejalas = Gejala::all();
-        $penyakits = Penyakit::all();
+        $penyakits = Penyakit::where('kode',$id)->first();
         //get post by ID
-        $post = Kasus::findOrFail($id);
+        $post = Kasus::with('gejala_detail')->where('penyakit',$id)->get();
+
+        $gejala_select = [];
+
+        foreach ($post as $key => $value) {
+            array_push($gejala_select,$value->gejala);
+        }
+
+        $gejalas = Gejala::whereNotIn('kode',$gejala_select)->get();
 
         //render view with post
         return view('admin.kasus.edit', compact('post', 'gejalas', 'penyakits'));
@@ -101,8 +108,8 @@ class KasusController extends Controller
     {
         //validate form
         $this->validate($request, [
-            'penyakit'     => 'required|min:1',
-            'gejala'     => 'required|min:1',
+            'Kasus penyakit'     => 'required|min:1',
+            'gejalas'     => 'required|min:1',
             'bobot'     => 'required',
         ]);
 
@@ -110,7 +117,7 @@ class KasusController extends Controller
         $post = Kasus::findOrFail($kode);
 
         $post->update([
-            'penyakit'     => $request->penyakit,
+            'Kasus penyakit'     => $request->penyakit,
             'gejala'     => $request->gejala,
             'bobot'     => $request->bobot,
         ]);
@@ -127,8 +134,38 @@ class KasusController extends Controller
         return redirect('kasus')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
+    public function destroyAll($kode): RedirectResponse
+    {
+        //get post by ID delete post
+        Kasus::where('penyakit', $kode)->delete();
+
+        //redirect to index
+        return redirect('kasus')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+
     public function check()
     {
         return !is_null($this->user());
+    }
+
+    public function listSelectedGejala($id){
+        $post = Kasus::with('gejala_detail')->where('penyakit',$id)->get();
+
+        return view('admin.kasus.components.list_selected_gejala', compact('post'));
+    }
+
+    public function listGejala($id){
+        $penyakits = Penyakit::where('kode',$id)->first();
+        $post = Kasus::with('gejala_detail')->where('penyakit',$id)->get();
+
+        $gejala_select = [];
+
+        foreach ($post as $key => $value) {
+            array_push($gejala_select,$value->gejala);
+        }
+
+        $gejalas = Gejala::whereNotIn('kode',$gejala_select)->get();
+
+        return view('admin.kasus.components.list_gejala', compact('gejalas','penyakits'));
     }
 }

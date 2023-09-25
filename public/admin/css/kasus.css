@@ -1,0 +1,79 @@
+.boxes-container {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    max-height: 380px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.boxes-container .boxes {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: .5rem;
+    padding: 0 0 0.5rem;
+    transition: all .5s ease;
+}
+
+.boxes-container .boxes button {
+    background-color: transparent;
+    color: #4AA96C;
+    padding: .05em 0.4em 0.05;
+    border-radius: 50px;
+    margin: 0;
+    border: none;
+}
+
+.boxes-container .boxes button:hover {
+    background-color: rgba(215, 215, 215, 0.4);
+}
+
+.boxes-container .boxes button:focus {
+    outline: none;
+}
+
+.selected-container {
+    position: relative;
+    width: 100%;
+    padding: 0;
+}
+
+.selected-container .selected-content {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+.selected-container .selected-content .select-box {
+    position: relative;
+    background-color: #A8DF8E;
+    border-radius: 50px;
+    padding: .5rem .5rem .5rem 1rem;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    transition: all .5s ease;
+}
+
+.selected-container .selected-content .select-box .action button {
+    background-color: transparent;
+    color: #6D8B74;
+    padding: .15em 0.5em 0;
+    border-radius: 50px;
+    margin: 0;
+    border: none;
+    transition: all .5s ease;
+}
+
+.selected-container .selected-content .select-box .action button:hover {
+    background-color: rgba(109, 139, 116, 0.5);
+    color: #f1f5fe;
+}
+
+.selected-container .selected-content .select-box .action button:focus {
+    outline: none;
+}

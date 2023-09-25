@@ -1,56 +1,72 @@
 @extends('admin.home')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('admin/css/kasus.css') }}">
+@endpush
 @section('contents')
-<section class="content">
-    <div class="container-fluid">
-        <div class="col-12">
-            <div class="card card-primary">
-                <!-- /.card-header -->
-                <div class="card-header">
-                    <h3 class="card-title">Input Data Gejala Penyakit</h3>
-                </div>
-                <!-- form start -->
-                <form action="{{route('kasus.update',$post->id)}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+    <section class="content">
+        <div class="container-fluid">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <!-- /.card-header -->
+                    <div class="card-header">
+                        <h3 class="card-title">Input Data Gejala Penyakit</h3>
+                    </div>
+                    <!-- form start -->
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Pilih Level</label>
-                            <select class="form-control @error('gejala') is-invalid @enderror" name="gejala" value="{{ old('gejala',$post->gejala) }}">
-                                @forelse ($gejalas as $gejala)
-                                <option value="{{$gejala->kode}}">{{$gejala->name}}</option>
-                                @empty
-                                <option>kosong</option>
-                                @endforelse
-                            </select>
+                            <label>Penyakit</label>
+                            <input type="text" class="form-control @error('penyakit') is-invalid @enderror" name="penyakit" value="{{ $penyakits->name }}" readonly>
                         </div>
                         <div class="form-group">
-                            <label>Pilih Level</label>
-                            <select class="form-control @error('penyakit') is-invalid @enderror" name="penyakit" value="{{ old('penyakit',$post->penyakit) }}">
-                                @forelse ($penyakits as $penyakit)
-                                <option value="{{$penyakit->kode}}">{{$penyakit->name}}</option>
-                                @empty
-                                <option>kosong</option>
-                                @endforelse
-                            </select>
+                            <div class="selected-container" id="gejala-selected-container" data-url='{{ route('list_selected_gejala', $penyakits->kode) }}'></div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputBobot">Bobot</label>
-                            <input type="text" max="20" min="0" class="form-control @error('bobot') is-invalid @enderror" name="bobot" value="{{ old('bobot',$post->bobot) }}" id="exampleInputBobot" placeholde r="Enter Gejala">
+                            <label>Pilih Gejala</label>
+                            <div class="boxes-container" id="gejala-container" data-url='{{ route('list_gejala', $penyakits->kode) }}'></div>
                         </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="{{ route('kasus.index') }}" class="btn btn-primary">Kembali ke tabel basis kasus</a>
                     </div>
-                </form>
+                </div>
+                <!-- /.card -->
             </div>
-            <!-- /.card -->
+            <!-- /.content -->
         </div>
-        <!-- /.content -->
-    </div>
-    <!-- /.container-fluid -->
-</section>
-<script>
-    CKEDITOR.replace('content');
-</script>
+        <!-- /.container-fluid -->
+    </section>
+    <script>
+        // CKEDITOR.replace('content');
+    </script>
 @endsection
+@push('scripts')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).ready(function() {
+            reload_list_gejala()
+            reload_list_selected_gejala()
+        })
+
+        function reload_list_gejala() {
+            if ($('#gejala-container').length) {
+                // $('#gejala-container').html('<p><b>Sedang Memuat..</b></p>');
+                var reload_url = $('#gejala-container').data('url');
+                $('#gejala-container').load(reload_url);
+            }
+        }
+
+        function reload_list_selected_gejala() {
+            if ($('#gejala-selected-container').length) {
+                // $('#gejala-selected-container').html('<p><b>Sedang Memuat..</b></p>');
+                var reload_url = $('#gejala-selected-container').data('url');
+                $('#gejala-selected-container').load(reload_url);
+            }
+        }
+    </script>
+@endpush

@@ -34,6 +34,9 @@
       <link rel="stylesheet" href={{ asset('admin/plugins/daterangepicker/daterangepicker.css') }}>
       <!-- summernote -->
       <link rel="stylesheet" href={{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}>
+      <link rel="stylesheet" href="{{ asset('admin/plugins/toastr/toastr.min.css') }}">
+
+      @stack('styles')
     </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -181,7 +184,9 @@
 <script src={{ asset('admin/plugins/datatables-buttons/js/buttons.print.min.js') }}></script>
 <script src={{ asset('admin/plugins/datatables-buttons/js/buttons.colVis.min.js') }}></script>
 <script src="{{asset('admin/plugins/jsgrid/jsgrid.min.js')}}"></script>
+<script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
 <!-- Page specific script -->
+@stack('scripts')
 <script>
   $(function () {
     $("#example0").DataTable({

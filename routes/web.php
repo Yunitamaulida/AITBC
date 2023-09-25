@@ -39,6 +39,10 @@ Route::get('informasi', [DiagnosaController::class, 'informasi'])->name('informa
 Route::get('konsultasi', [DiagnosaController::class, 'konsultasi'])->name('konsultasi')->middleware('guest');
 Route::post('diagnosa', [DiagnosaController::class, 'konsultasiPost'])->name('diagnosa.post')->middleware('guest');
 
+Route::get('list-gejala/{id}',[KasusController::class, 'listGejala'])->name('list_gejala')->middleware('auth');
+Route::get('list-selected-gejala/{id}',[KasusController::class, 'listSelectedGejala'])->name('list_selected_gejala')->middleware('auth');
+Route::delete('delete-all-gejala/{kode}',[KasusController::class, 'destroyAll'])->name('deleted_kasus_all')->middleware('auth');
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
