@@ -61,8 +61,8 @@ class DiagnosaController extends Controller
         $this->validate($request, [
             'nama'     => 'required',
             'email'     => 'required',
-            'bb'   => 'required',
-            'bt'   => 'required',
+            // 'bb'   => 'required',
+            // 'bt'   => 'required',
             'jenis'   => 'required',
             'alamat'   => 'required|min:5',
         ]);
@@ -72,8 +72,8 @@ class DiagnosaController extends Controller
             'name'     => $request->nama,
             'email'     => $request->email,
             'jenis_kelamin'   => $request->jenis,
-            'bb'   => $request->bb,
-            'bt'   => $request->bt,
+            'bb'   => '0',
+            'bt'   => '0',
             'alamat'   => $request->alamat,
             'gejala_terpilih'   => implode("|", $gejala),
             'penyakit'   => $penyakit,
